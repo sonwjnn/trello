@@ -1,0 +1,14 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  padding-left: $gap;
+  &.app-bar {
+    background-color: $app-color;
+    font-size: 1.5rem;
+  }
+
+  &.board-bar {
+    background-color: $primary-color;
+    font-size: 1.1rem;
+  }
+}
