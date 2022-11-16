@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600');
+
+html {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+input,
+textarea,
+selct,
+button {
+  outline: none;
+}
+
+input {
+  line-height: normal;
+}
+
+label,
+button {
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+body {
+  font-size: 14px;
+  font-family: 'Source Sans Pro', sans-serif;
+  line-height: 1.3rem;
+}
+
+.Trello {
+  height: 100vh;
+  display: grid;
+  grid-template-rows: 40px 1fr;
+  background-color: $primary-color;
+}
