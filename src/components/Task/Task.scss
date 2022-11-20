@@ -1,0 +1,18 @@
+@import 'sass/variables';
+
+.task {
+  padding: $gap;
+  background-color: #ffffff;
+  border-radius: $card-border-radius;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  &:not(:last-child) {
+    margin-bottom: $gap;
+  }
+  img {
+    display: block;
+    margin: -$gap 0 $gap (-$gap);
+    width: calc(100% + 2 * #{$gap});
+    border-top-left-radius: $item-border-radius;
+    border-top-right-radius: $item-border-radius;
+  }
+}
