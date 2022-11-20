@@ -1,0 +1,7 @@
+@import 'sass/variables';
+
+.board {
+  display: grid;
+  grid-template-rows: 50px 1fr;
+  margin: 0 $gap $gap;
+}
