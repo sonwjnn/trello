@@ -1,6 +1,6 @@
 @import 'sass/variables';
 
-.task {
+.card {
   padding: $gap;
   background-color: #ffffff;
   border-radius: $card-border-radius;
@@ -8,7 +8,7 @@
   &:not(:last-child) {
     margin-bottom: $gap;
   }
-  img {
+  &-cover {
     display: block;
     margin: -$gap 0 $gap (-$gap);
     width: calc(100% + 2 * #{$gap});
