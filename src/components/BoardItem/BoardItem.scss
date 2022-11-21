@@ -31,7 +31,7 @@
     padding-left: 10px;
   }
 
-  ul.tasks {
+  .cards {
     list-style-type: none;
     max-height: calc(100% - #{$item-header-height} - #{$item-footer-height});
     overflow-y: auto;

@@ -1,16 +1,18 @@
 import React from 'react'
 import './BoardItem.scss'
-import Task from 'components/Task/Task'
-function BoardItem() {
+import Card from 'components/Card/Card'
+import { mapOrder } from 'utilities/sorts'
+function BoardItem(props) {
+  const { item } = props
+  const cards = mapOrder(item.cards, item.cardOrder, 'id')
+
   return (
     <div className="board-item">
-      <header>Header</header>
-      <ul className="tasks">
-        <Task />
-        <li className="task">123</li>
-        <li className="task">123</li>
-        <li className="task">123</li>
-        <li className="task">123</li>
+      <header>{item.title}</header>
+      <ul className="cards">
+        {cards.map((card, index) => (
+          <Card card={card} key={index} />
+        ))}
       </ul>
       <footer>Footer</footer>
     </div>
