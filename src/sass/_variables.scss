@@ -4,10 +4,15 @@ $list-color: #ebecf0;
 $common-color: rgba(255, 255, 255, 0.24);
 
 $gap: 10px;
+$app-bar-height: 5vh;
+$board-bar-height: 6vh;
+$board-content-height: 88vh;
+$board-height: calc(#{$board-bar-height} + #{$board-content-height});
+$board-column-height: calc(#{$board-content-height} - 2 * #{$gap});
 
-$item-header-height: 36px;
-$item-footer-height: 36px;
-$item-border-radius: 5px;
+$column-header-height: 36px;
+$column-footer-height: 36px;
+$column-border-radius: 5px;
 $card-border-radius: 4px;
 
 $screen-lg: 1201px;

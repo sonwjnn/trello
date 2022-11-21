@@ -2,6 +2,7 @@
 @import 'sass/reset';
 
 .board-bar {
+  height: $board-bar-height;
   display: flex;
   align-items: center;
   padding-left: $gap;

@@ -48,7 +48,6 @@ body {
 
 .Trello {
   height: 100vh;
-  display: grid;
-  grid-template-rows: 40px 1fr;
+  overflow: hidden;
   background-color: $primary-color;
 }

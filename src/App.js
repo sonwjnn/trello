@@ -1,3 +1,4 @@
+import React from 'react'
 import './App.scss'
 import AppBar from 'components/AppBar/AppBar'
 import Board from 'components/Board/Board'

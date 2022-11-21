@@ -3,12 +3,17 @@ import './Card.scss'
 function Card(props) {
   const { card } = props
   return (
-    <li className="card">
+    <div className="card">
       {card.cover && (
-        <img className="card-cover" src={card.cover} alt="trello-img" />
+        <img
+          className="card-cover"
+          src={card.cover}
+          alt="trello-img"
+          onMouseDown={e => e.preventDefault()}
+        />
       )}
       {card.title}
-    </li>
+    </div>
   )
 }
 

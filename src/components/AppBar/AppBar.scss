@@ -1,6 +1,7 @@
 @import 'sass/variables';
 
 .app-bar {
+  height: $app-bar-height;
   display: flex;
   align-items: center;
   padding-left: $gap;
