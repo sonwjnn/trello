@@ -3,13 +3,15 @@ import { isEmpty } from 'lodash'
 
 import './BoardContent.scss'
 import BoardColumn from 'components/BoardColumn/BoardColumn'
+import { Container, Draggable } from 'react-smooth-dnd'
 import { initialData } from 'actions/initialData'
 import { mapOrder } from 'utilities/sorts'
-import { Container, Draggable } from 'react-smooth-dnd'
+import { applyDrag } from 'utilities/dragDrop'
 
 function BoardContent() {
   const [board, setBoard] = useState({})
   const [columns, setColumns] = useState([])
+
   useEffect(() => {
     const boardFromDB = initialData.boards.find(board => board.id === 'board-1')
     if (boardFromDB) {
@@ -23,12 +25,25 @@ function BoardContent() {
   }
 
   const onColumnDrop = dropResult => {
-    // const scene = Object.assign({}, this.state.scene)
-    // scene.children = applyDrag(scene.children, dropResult)
-    // this.setState({
-    //   scene
-    // })
-    console.log(dropResult)
+    let newColumns = [...columns]
+    let newBoard = { ...board }
+
+    newColumns = applyDrag(newColumns, dropResult)
+    newBoard.columnOrder = newColumns.map(col => col.id)
+    newBoard.columns = newColumns
+
+    setBoard(newBoard)
+    setColumns(newColumns)
+  }
+
+  const onCardDrop = (columnId, dropResult) => {
+    if (dropResult.removedIndex != null || dropResult.addedIndex != null) {
+      let newColumns = [...columns]
+      let currentColumn = newColumns.find(col => col.id === columnId)
+      currentColumn.cards = applyDrag(currentColumn.cards, dropResult)
+      currentColumn.cardOrder = newColumns.map(card => card.id)
+      setColumns(newColumns)
+    }
   }
 
   return (
@@ -46,10 +61,13 @@ function BoardContent() {
       >
         {columns.map((column, index) => (
           <Draggable key={index}>
-            <BoardColumn column={column} />
+            <BoardColumn column={column} onCardDrop={onCardDrop} />
           </Draggable>
         ))}
       </Container>
+      <div className="add-new-column">
+        <i className="fa fa-plus icon"></i>Add another column
+      </div>
     </div>
   )
 }

@@ -50,4 +50,9 @@ body {
   height: 100vh;
   overflow: hidden;
   background-color: $primary-color;
+  color: $primary-text-color;
+  .icon {
+    font-size: 14px;
+    margin-right: 3px;
+  }
 }

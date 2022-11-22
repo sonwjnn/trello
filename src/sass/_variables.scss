@@ -2,11 +2,13 @@ $primary-color: #0079bf;
 $app-color: #0067a3;
 $list-color: #ebecf0;
 $common-color: rgba(255, 255, 255, 0.24);
+$primary-text-color: #333;
 
 $gap: 10px;
 $app-bar-height: 5vh;
 $board-bar-height: 6vh;
 $board-content-height: 88vh;
+// board height: 99vh, 1vh for scrollbar
 $board-height: calc(#{$board-bar-height} + #{$board-content-height});
 $board-column-height: calc(#{$board-content-height} - 2 * #{$gap});
 
