@@ -7,7 +7,6 @@
   margin-left: $gap;
   > * {
     background-color: $list-color;
-    color: #333;
     padding: 0 8px;
   }
 
@@ -28,6 +27,14 @@
     border-bottom-left-radius: $column-border-radius;
     border-bottom-right-radius: $column-border-radius;
     padding-left: 10px;
+    color: #888;
+    .footer-actions {
+      margin-left: $gap;
+      cursor: pointer;
+      &:hover {
+        color: $primary-text-color;
+      }
+    }
   }
 
   .cards {
