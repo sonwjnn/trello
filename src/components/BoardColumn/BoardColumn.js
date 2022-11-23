@@ -12,15 +12,6 @@ function BoardColumn(props) {
       <header className="column-drag-handle">{column.title}</header>
       <div className="cards">
         <Container
-          // onDragStart={e => console.log('drag started', e)}
-          // onDragEnd={e => console.log('drag end', e)}
-          // onDragEnter={() => {
-          //   console.log('drag enter:', column.id)
-          // }}
-          // onDragLeave={() => {
-          //   console.log('drag leave:', column.id)
-          // }}
-          // onDropReady={p => console.log('Drop ready: ', p)}
           groupName="col"
           onDrop={dragResult => onCardDrop(column.id, dragResult)}
           getChildPayload={index => cards[index]}

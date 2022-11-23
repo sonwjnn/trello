@@ -5,25 +5,33 @@
   height: $board-content-height;
   overflow-x: auto;
   overflow-y: hidden;
+  &::after {
+    content: '';
+    flex: 0 0 $gap;
+  }
   &::-webkit-scrollbar {
     -webkit-appearance: none;
   }
+
   &::-webkit-scrollbar:horizontal {
     height: 11px;
   }
+
   &::-webkit-scrollbar-thumb {
     background-color: $common-color;
     border-radius: 8px;
   }
+
   .board-column-drop-preview {
     background-color: rgba(150, 150, 200, 0.1);
     border: 1px dashed #abc;
     margin: 5px 45px 5px 5px;
   }
+
   .add-new-column {
     width: 250px;
-    height: 32px;
-    line-height: 26px;
+    max-width: 250px;
+    line-height: calc(32 / 15);
     padding: 4px 0 4px 15px;
     cursor: pointer;
     color: #fff;
@@ -33,6 +41,47 @@
     border-radius: $card-border-radius;
     &:hover {
       background-color: hsla(0, 0%, 100%, 0.34);
+    }
+  }
+
+  .enter-new-column {
+    width: 250px;
+    max-width: 250px;
+    background-color: $list-color;
+    padding: 4px 10px;
+    line-height: 32px;
+    margin-left: $gap;
+    border-radius: $column-border-radius;
+  }
+
+  .input-enter-new-column {
+    margin: 4px 0;
+    padding: 7px 8px;
+    border-radius: $column-border-radius;
+    border: 2px solid darken($list-color, 8);
+    width: 100%;
+  }
+
+  .btn.add-new-col {
+    margin: 2px 0;
+    padding: 8px 12px;
+    background-color: #0079bf;
+    color: #fff;
+    border: none;
+    border-radius: $column-border-radius;
+    &:hover {
+      background-color: #026aa7;
+    }
+  }
+  span.cancle-new-column {
+    margin-left: $gap;
+    cursor: pointer;
+    i {
+      font-size: 18px;
+      color: $alert-danger-color;
+      &:hover {
+        color: darken($alert-danger-color, 10);
+      }
     }
   }
 }
