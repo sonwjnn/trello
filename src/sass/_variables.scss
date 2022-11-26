@@ -13,10 +13,10 @@ $board-content-height: 88vh;
 $board-height: calc(#{$board-bar-height} + #{$board-content-height});
 $board-column-height: calc(#{$board-content-height} - 2 * #{$gap});
 
-$column-header-height: 36px;
+$column-header-height: 42px;
 $column-footer-height: 36px;
-$column-border-radius: 5px;
-$card-border-radius: 4px;
+$column-border-radius: 3px;
+$card-border-radius: 3px;
 
 $screen-lg: 1201px;
 $screen-md: 992px;

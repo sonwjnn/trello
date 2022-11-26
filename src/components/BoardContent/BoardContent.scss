@@ -35,7 +35,7 @@
     padding: 4px 0 4px 15px;
     cursor: pointer;
     color: #fff;
-    margin-left: $gap;
+    margin-left: calc(2 * #{$gap});
     font-size: 15px;
     background-color: hsla(0, 0%, 100%, 0.24);
     border-radius: $card-border-radius;
@@ -50,8 +50,9 @@
     background-color: $list-color;
     padding: 4px 10px;
     line-height: 32px;
-    margin-left: $gap;
+    margin-left: calc(2 * #{$gap});
     border-radius: $column-border-radius;
+    transition: margin 85ms ease-in, height 85ms;
   }
 
   .input-enter-new-column {

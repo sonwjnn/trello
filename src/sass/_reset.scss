@@ -77,4 +77,24 @@ body {
     box-shadow: none;
     border: 2px solid $primary-color;
   }
+
+  .btn:focus,
+  .btn:active {
+    outline: none;
+    box-shadow: none;
+  }
+
+  .trello-input-editable {
+    font-size: inherit;
+    cursor: pointer;
+    margin: 4px 0 4px -6px;
+    padding: 0px 4px;
+    background-color: inherit;
+    border-radius: $column-border-radius;
+    font-weight: inherit;
+    border: none;
+    &:focus {
+      background-color: #ffffff;
+    }
+  }
 }

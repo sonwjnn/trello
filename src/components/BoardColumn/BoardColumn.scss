@@ -19,6 +19,46 @@
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
+    display: flex;
+    .column-title {
+      flex: 90%;
+    }
+    .column-dropdown-actions {
+      flex: 10%;
+      button.dropdown-btn {
+        padding: 0px 8px 3px 8px;
+        font-size: 16px;
+        border: none;
+        font-weight: bold;
+        letter-spacing: 1px;
+        background-color: $list-color;
+        color: darken($list-color, 50);
+        margin-top: -4px;
+        margin-right: -4px;
+
+        &::after {
+          content: '...';
+          border: none;
+        }
+        &:hover {
+          background-color: darken($list-color, 10);
+          color: $primary-text-color;
+        }
+      }
+    }
+
+    .dropdown-menu {
+      padding: 0;
+
+      overflow: hidden;
+      a.dropdown-item {
+        padding: 0 12px;
+        line-height: 36px;
+        &:not(:last-child) {
+          border-bottom: 1px solid darken($list-color, 10);
+        }
+      }
+    }
   }
 
   footer {
