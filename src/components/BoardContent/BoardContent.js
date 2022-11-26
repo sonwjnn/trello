@@ -20,7 +20,12 @@ function BoardContent() {
   const [columns, setColumns] = useState([])
   const [openNewColumn, setOpenNewColumn] = useState(false)
   const [newColumnTitle, setNewColumnTitle] = useState('')
-  const newColumnInputForm = useRef(null)
+  const newColumnInputRef = useRef(null)
+
+  const onNewColumnTitleChange = useCallback(
+    e => setNewColumnTitle(e.target.value),
+    []
+  )
 
   useEffect(() => {
     const boardFromDB = initialData.boards.find(board => board.id === 'board-1')
@@ -31,16 +36,15 @@ function BoardContent() {
   }, [])
 
   useEffect(() => {
-    if (newColumnInputForm && newColumnInputForm.current) {
-      newColumnInputForm.current.focus()
-      newColumnInputForm.current.select()
+    if (newColumnInputRef && newColumnInputRef.current) {
+      newColumnInputRef.current.focus()
+      newColumnInputRef.current.select()
     }
   }, [openNewColumn])
 
-  const onNewColumnTitleChange = useCallback(e => {
-    setNewColumnTitle(e.target.value)
-  }, [])
-
+  const toggleNewColumnForm = () => {
+    setOpenNewColumn(!openNewColumn)
+  }
   if (isEmpty(board)) {
     return <div className="not-board">No Board Content!</div>
   }
@@ -67,36 +71,51 @@ function BoardContent() {
     }
   }
 
-  const toggleNewColumnForm = () => {
-    setOpenNewColumn(!openNewColumn)
-  }
-
   const addNewColumn = () => {
     if (!newColumnTitle) {
-      newColumnInputForm.current.focus()
+      newColumnInputRef.current.focus()
       return
     }
-
-    const newColumn = {
+    const newComlum = {
       title: newColumnTitle.trim(),
-      id: Math.random().toString(36).substr(2, 5),
+      boardId: board.id,
+      id: Math.random().toString(36).substring(2, 5),
       cardOrder: [],
-      cards: [],
-      boardId: board.boardId
+      cards: []
     }
 
     let newColumns = [...columns]
-    let newBoard = { ...board }
+    newColumns.push(newComlum)
 
-    newColumns.push(newColumn)
+    let newBoard = { ...board }
     newBoard.columnOrder = newColumns.map(col => col.id)
     newBoard.columns = newColumns
 
     setBoard(newBoard)
     setColumns(newColumns)
     setNewColumnTitle('')
-
     toggleNewColumnForm()
+  }
+
+  const onColumnUpdate = newColumnToUpdate => {
+    const columnIdToUpdate = newColumnToUpdate.id
+    let newColumns = [...columns]
+    const columnIndexToUpdate = newColumns.findIndex(
+      item => item.id === columnIdToUpdate
+    )
+
+    if (newColumnToUpdate._destroy) {
+      newColumns.splice(columnIndexToUpdate, 1)
+    } else {
+      newColumns.splice(columnIndexToUpdate, 1, newColumnToUpdate)
+    }
+
+    let newBoard = { ...board }
+    newBoard.columnOrder = newColumns.map(col => col.id)
+    newBoard.columns = newColumns
+
+    setBoard(newBoard)
+    setColumns(newColumns)
   }
 
   return (
@@ -114,7 +133,11 @@ function BoardContent() {
       >
         {columns.map((column, index) => (
           <Draggable key={index}>
-            <BoardColumn column={column} onCardDrop={onCardDrop} />
+            <BoardColumn
+              column={column}
+              onCardDrop={onCardDrop}
+              onColumnUpdate={onColumnUpdate}
+            />
           </Draggable>
         ))}
       </Container>
@@ -134,19 +157,18 @@ function BoardContent() {
                 type="email"
                 placeholder="Enter column title..."
                 className="input-enter-new-column"
-                ref={newColumnInputForm}
+                ref={newColumnInputRef}
                 onChange={onNewColumnTitleChange}
+                // onBlur={toggleNewColumnForm}
                 value={newColumnTitle}
-                onKeyDown={e => e.key === 'Enter' && addNewColumn()}
-                onBlur={toggleNewColumnForm}
               />
               <Button
-                onMouseDown={addNewColumn}
-                className="add-new-col"
+                className="add-new-col success"
                 variant="success"
                 size="sm"
+                onClick={addNewColumn}
               >
-                Add column
+                Add list
               </Button>
               <span onClick={toggleNewColumnForm} className="cancle-new-column">
                 <i className="fa fa-trash icon" />

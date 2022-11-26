@@ -7,8 +7,8 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "bootstrap": "^5.2.3",
-    "bootstrap-react": "^0.5.0-alpha.14",
     "font-awesome": "^4.7.0",
+    "html-react-parser": "^3.0.4",
     "jsconfig": "^0.2.0",
     "lodash": "^4.17.21",
     "node-sass": "^7.0.3",
@@ -43,5 +43,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "proxy": "http://localhost:3000"
 }
