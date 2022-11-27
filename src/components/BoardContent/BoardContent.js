@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { isEmpty } from 'lodash'
 
 import './BoardContent.scss'
@@ -19,13 +19,13 @@ function BoardContent() {
   const [board, setBoard] = useState({})
   const [columns, setColumns] = useState([])
   const [openNewColumn, setOpenNewColumn] = useState(false)
+
   const [newColumnTitle, setNewColumnTitle] = useState('')
+  const toggleNewColumnForm = () => setOpenNewColumn(!openNewColumn)
+
   const newColumnInputRef = useRef(null)
 
-  const onNewColumnTitleChange = useCallback(
-    e => setNewColumnTitle(e.target.value),
-    []
-  )
+  const onNewColumnTitleChange = e => setNewColumnTitle(e.target.value)
 
   useEffect(() => {
     const boardFromDB = initialData.boards.find(board => board.id === 'board-1')
@@ -42,9 +42,6 @@ function BoardContent() {
     }
   }, [openNewColumn])
 
-  const toggleNewColumnForm = () => {
-    setOpenNewColumn(!openNewColumn)
-  }
   if (isEmpty(board)) {
     return <div className="not-board">No Board Content!</div>
   }
@@ -101,10 +98,11 @@ function BoardContent() {
     const columnIdToUpdate = newColumnToUpdate.id
     let newColumns = [...columns]
     const columnIndexToUpdate = newColumns.findIndex(
-      item => item.id === columnIdToUpdate
+      col => col.id === columnIdToUpdate
     )
 
     if (newColumnToUpdate._destroy) {
+      console.log(newColumnToUpdate)
       newColumns.splice(columnIndexToUpdate, 1)
     } else {
       newColumns.splice(columnIndexToUpdate, 1, newColumnToUpdate)
@@ -170,7 +168,10 @@ function BoardContent() {
               >
                 Add list
               </Button>
-              <span onClick={toggleNewColumnForm} className="cancle-new-column">
+              <span
+                onClick={toggleNewColumnForm}
+                className="trello-cancle-icon"
+              >
                 <i className="fa fa-trash icon" />
               </span>
             </Col>

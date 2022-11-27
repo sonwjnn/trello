@@ -53,7 +53,7 @@ body {
   color: $primary-text-color;
   .icon {
     font-size: 14px;
-    margin-right: 3px;
+    margin: 0 3px 0 $gap;
     background-color: transparent;
   }
 
@@ -95,6 +95,18 @@ body {
     border: none;
     &:focus {
       background-color: #ffffff;
+    }
+  }
+
+  .trello-cancle-icon {
+    margin-left: $gap;
+    cursor: pointer;
+    i {
+      font-size: 18px;
+      color: $alert-danger-color;
+      &:hover {
+        color: darken($alert-danger-color, 10);
+      }
     }
   }
 }
