@@ -14,7 +14,7 @@ import {
 } from 'utilities/contentEditable'
 function BoardColumn(props) {
   const { column, onCardDrop, onColumnUpdate } = props
-  const cards = mapOrder(column.cards, column.cardOrder, 'id')
+  const cards = mapOrder(column.cards, column.cardOrder, '_id')
 
   const [showConfirmModal, setShowConfirmModal] = useState(false)
   const [titleColumn, setTitleColumn] = useState('')
@@ -70,14 +70,14 @@ function BoardColumn(props) {
     const newCard = {
       id: Math.random().toString(36).substring(2, 5),
       boardId: column.boardId,
-      columnId: column.id,
+      columnId: column._id,
       title: newCardTitle.trim(),
       cover: null
     }
 
     let newColumn = cloneDeep(column)
     newColumn.cards.push(newCard)
-    newColumn.cardOrder.push(newCard.id)
+    newColumn.cardOrder.push(newCard._id)
     onColumnUpdate(newColumn)
 
     setNewCardTitle('')
@@ -126,7 +126,7 @@ function BoardColumn(props) {
       <div className="cards">
         <Container
           groupName="col"
-          onDrop={dragResult => onCardDrop(column.id, dragResult)}
+          onDrop={dragResult => onCardDrop(column._id, dragResult)}
           getChildPayload={index => cards[index]}
           dragClass="card-ghost"
           dropClass="card-ghost-drop"
