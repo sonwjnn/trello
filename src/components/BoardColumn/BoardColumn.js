@@ -12,8 +12,9 @@ import {
   onInputPressEnter,
   selectAllInlineText
 } from 'utilities/contentEditable'
+import { createNewCard, updateColumn } from 'actions/ApiCall'
 function BoardColumn(props) {
-  const { column, onCardDrop, onColumnUpdate } = props
+  const { column, onCardDrop, onColumnUpdateState } = props
   const cards = mapOrder(column.cards, column.cardOrder, '_id')
 
   const [showConfirmModal, setShowConfirmModal] = useState(false)
@@ -39,11 +40,18 @@ function BoardColumn(props) {
   const handleColumnTitleChange = e => setTitleColumn(e.target.value)
 
   const handleColumnTitleBlur = () => {
-    const newColumn = {
-      ...column,
-      title: titleColumn
+    if (column.title !== titleColumn) {
+      const newColumn = {
+        ...column,
+        title: titleColumn
+      }
+
+      //call api update column
+      updateColumn(newColumn._id, newColumn).then(updatedColumn => {
+        updatedColumn.cards = newColumn.cards
+        onColumnUpdateState(updatedColumn)
+      })
     }
-    onColumnUpdate(newColumn)
   }
 
   const toggleShowConfirmModal = () => {
@@ -55,7 +63,11 @@ function BoardColumn(props) {
         ...column,
         _destroy: true
       }
-      onColumnUpdate(newColumn)
+
+      //call api update column
+      updateColumn(newColumn._id, newColumn).then(updatedColumn => {
+        onColumnUpdateState(updatedColumn)
+      })
     }
     toggleShowConfirmModal()
   }
@@ -68,20 +80,20 @@ function BoardColumn(props) {
     }
 
     const newCard = {
-      id: Math.random().toString(36).substring(2, 5),
       boardId: column.boardId,
       columnId: column._id,
-      title: newCardTitle.trim(),
-      cover: null
+      title: newCardTitle.trim()
     }
 
-    let newColumn = cloneDeep(column)
-    newColumn.cards.push(newCard)
-    newColumn.cardOrder.push(newCard._id)
-    onColumnUpdate(newColumn)
+    createNewCard(newCard).then(card => {
+      let newColumn = cloneDeep(column)
+      newColumn.cards.push(card)
+      newColumn.cardOrder.push(card._id)
+      onColumnUpdateState(newColumn)
 
-    setNewCardTitle('')
-    newCardInputAreaRef.current.focus()
+      setNewCardTitle('')
+      newCardInputAreaRef.current.focus()
+    })
   }
   return (
     <div className="board-column">
@@ -188,7 +200,7 @@ function BoardColumn(props) {
       </footer>
       <ConfirmModal
         show={showConfirmModal}
-        onAction={() => onConfirmModalAction(MODAL_ACTION_CONFIRM)}
+        onAction={onConfirmModalAction}
         title="Remove Column"
         content={`Are you sure want to remove <strong>${column.title}</strong>? </br>All related cards will also be removed !!`}
       />
