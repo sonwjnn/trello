@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { isEmpty } from 'lodash'
+import { isEmpty, cloneDeep } from 'lodash'
 
 import './BoardContent.scss'
 import BoardColumn from 'components/BoardColumn/BoardColumn'
@@ -14,7 +14,13 @@ import {
   Button
 } from 'react-bootstrap'
 
-import { createNewColumn, fetchBoardDetails } from 'actions/ApiCall'
+import {
+  createNewColumn,
+  fetchBoardDetails,
+  updateBoard,
+  updateColumn,
+  updateCard
+} from 'actions/ApiCall'
 
 function BoardContent() {
   const [board, setBoard] = useState({})
@@ -48,24 +54,52 @@ function BoardContent() {
   }
 
   const onColumnDrop = dropResult => {
-    let newColumns = [...columns]
-    let newBoard = { ...board }
+    if (dropResult.removedIndex == dropResult.addedIndex) return
+
+    let newColumns = cloneDeep(columns)
+    let newBoard = cloneDeep(board)
 
     newColumns = applyDrag(newColumns, dropResult)
     newBoard.columnOrder = newColumns.map(col => col._id)
     newBoard.columns = newColumns
 
-    setBoard(newBoard)
     setColumns(newColumns)
+    setBoard(newBoard)
+
+    //call api update board and column
+    updateBoard(newBoard._id, newBoard).catch(() => {
+      setColumns(columns)
+      setBoard(board)
+    })
   }
 
-  const onCardDrop = (columnId, dropResult) => {
-    if (dropResult.removedIndex != null || dropResult.addedIndex != null) {
+  const onCardDrop = async (columnId, dropResult) => {
+    if (dropResult.removedIndex == dropResult.addedIndex) return
+
+    if (dropResult.removedIndex !== null || dropResult.addedIndex !== null) {
       let newColumns = [...columns]
+      //cloneDeep newwColumns error cant change state columns
+
       let currentColumn = newColumns.find(col => col._id === columnId)
       currentColumn.cards = applyDrag(currentColumn.cards, dropResult)
-      currentColumn.cardOrder = newColumns.map(card => card._id)
+      currentColumn.cardOrder = currentColumn.cards.map(card => card._id)
       setColumns(newColumns)
+
+      if (dropResult.removedIndex !== null && dropResult.addedIndex !== null) {
+        await updateColumn(currentColumn._id, currentColumn).catch(() =>
+          setColumns(columns)
+        )
+      } else {
+        await updateColumn(currentColumn._id, currentColumn).catch(() => {
+          setColumns(columns)
+        })
+
+        if (dropResult.addedIndex !== null) {
+          let currentCard = cloneDeep(dropResult.payload)
+          currentCard.columnId = currentColumn._id
+          updateCard(currentCard._id, currentCard)
+        }
+      }
     }
   }
 
