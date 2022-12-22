@@ -14,7 +14,7 @@ function Card(props) {
           //link:"https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/draggable"
         />
       )}
-      {card.title}
+      <div className="card-container-title">{card.title}</div>
     </div>
   )
 }

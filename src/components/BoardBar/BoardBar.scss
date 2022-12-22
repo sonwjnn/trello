@@ -8,4 +8,98 @@
   padding-left: $gap;
   background-color: $primary-color;
   font-size: 1.1rem;
+  .workspace {
+    display: flex;
+    height: 100%;
+    list-style: none;
+    padding: 0;
+    margin: 0 auto 0 0;
+    gap: $gap;
+    &-item {
+      padding: 0;
+      margin: 0;
+      height: 100%;
+      &-link {
+        padding-right: 12px;
+        color: #fff;
+        border: none;
+        background-color: #3394cc;
+        display: flex;
+        height: calc(#{$app-bar-height} - 2 * #{$gap} + 8px);
+        align-items: center;
+        &:hover {
+          background-color: #4da2d3;
+        }
+        &.dropdown-toggle::after {
+          display: none;
+        }
+      }
+      .user-icon {
+        height: 100%;
+        width: 100%;
+        .icon {
+          margin: 0 8px 0 0;
+        }
+      }
+    }
+  }
+  .board-header {
+    display: flex;
+    height: 100%;
+    gap: $gap;
+    &-actions {
+      list-style: none;
+      padding: 0;
+      margin: 0 $gap 0 auto;
+      gap: $gap;
+      &-item {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        .bolt-icon {
+          height: 100%;
+          width: 100%;
+          .icon {
+            font-size: 16px;
+            margin: 0 8px 0 0;
+          }
+        }
+        .rocket-icon {
+          height: 100%;
+          width: 100%;
+          .icon {
+            font-size: 16px;
+            margin: 0 8px 0 0;
+          }
+        }
+        .filter-icon {
+          height: 100%;
+          width: 100%;
+          .icon {
+            font-size: 16px;
+            margin: 0 8px 0 0;
+          }
+        }
+      }
+      &-link {
+        padding-right: 12px;
+        color: #fff;
+        border: none;
+        background-color: #3394cc;
+        display: flex;
+        height: calc(#{$app-bar-height} - 2 * #{$gap} + 8px);
+        align-items: center;
+        &:hover {
+          background-color: #4da2d3;
+        }
+        &.dropdown-toggle::after {
+          display: none;
+        }
+        .icon {
+          align-self: center;
+          font-size: 19px;
+        }
+      }
+    }
+  }
 }

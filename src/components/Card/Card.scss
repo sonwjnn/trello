@@ -1,19 +1,27 @@
 @import 'sass/variables';
 
 .card {
-  padding: $gap;
   background-color: #ffffff;
   border-radius: $card-border-radius;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
   margin-bottom: $gap;
   cursor: pointer;
   border: none;
+  &-container-title {
+    padding: 8px $gap;
+  }
   &-cover {
     display: block;
-    margin: -$gap 0 $gap (-$gap);
-    width: calc(100% + 2 * #{$gap});
+    // width: calc(100% + 2 * #{$gap});
     border-top-left-radius: $column-border-radius;
     border-top-right-radius: $column-border-radius;
+    max-width: 100%;
+    height: auto;
+    left: 0px;
+    right: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   &-ghost {

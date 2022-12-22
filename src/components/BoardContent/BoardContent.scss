@@ -35,7 +35,7 @@
     padding: 4px 0 4px 8px;
     cursor: pointer;
     color: #fff;
-    margin-left: calc(2 * #{$gap});
+    margin: 0 $gap 0 calc(2 * #{$gap});
     font-size: 15px;
     background-color: hsla(0, 0%, 100%, 0.24);
     border-radius: $card-border-radius;

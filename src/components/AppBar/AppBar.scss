@@ -1,10 +1,262 @@
 @import 'sass/variables';
+@import 'sass/global.scss';
 
 .app-bar {
   height: $app-bar-height;
+  line-height: $app-bar-height;
   display: flex;
   align-items: center;
   padding-left: $gap;
+  padding-top: 6px;
   background-color: $app-color;
   font-size: 1.5rem;
+  justify-content: space-between;
+  .header {
+    display: flex;
+    height: 100%;
+    &-dock {
+      max-width: 40px;
+      min-width: 40px;
+      height: calc(5vh - 2 * 10px + 8px);
+      .dock-link {
+        box-sizing: border-box;
+        display: block;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: transparent;
+        height: calc(#{$app-bar-height} - 2 * #{$gap} + 8px);
+        &:hover {
+          background-color: $primary-btn-hover-color;
+        }
+        &.dropdown-toggle::after {
+          display: none;
+        }
+        .icon {
+          color: #fff;
+          font-size: 17px;
+          margin: 0;
+        }
+      }
+    }
+    &-logo {
+      max-width: 90px;
+      min-width: 90px;
+      margin-right: $gap;
+      height: calc(5vh - 2 * 10px + 8px);
+      .logo-link {
+        display: block;
+        padding: 0 8px;
+        width: 100%;
+        height: 100%;
+      }
+      & div {
+        height: 100%;
+      }
+      .logo-bg {
+        position: relative;
+        &::before {
+          content: '';
+          background-image: url(https://a.trellocdn.com/prgb/dist/images/header-logo-spirit.d947df93bc055849898e.gif);
+          background-repeat: no-repeat;
+          background-size: contain;
+          background-position: center;
+          display: block;
+          position: absolute;
+          opacity: 0;
+          left: 0;
+          top: 0;
+          right: 0;
+          bottom: 0;
+        }
+        &::after {
+          content: '';
+          background-image: url(https://a.trellocdn.com/prgb/dist/images/header-logo-spirit-loading.87e1af770a49ce8e84e3.gif);
+          background-repeat: no-repeat;
+          background-size: contain;
+          background-position: center;
+          // background-color: $primary-btn-hover-color;
+          display: block;
+          opacity: 1;
+          position: absolute;
+          left: 0;
+          top: 0;
+          right: 0;
+          bottom: 0;
+        }
+      }
+    }
+    &-menu {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      gap: $gap;
+      flex-shrink: 0;
+      height: calc(5vh - 2 * 10px + 8px);
+      &-item {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        flex-grow: 0;
+      }
+      &-link {
+        padding-right: 8px;
+        color: #fff;
+        border: none;
+        background-color: transparent;
+        display: flex;
+        height: calc(#{$app-bar-height} - 2 * #{$gap} + 8px);
+        align-items: center;
+        &:hover {
+          background-color: $primary-btn-hover-color;
+        }
+        &.dropdown-toggle::after {
+          display: none;
+        }
+        .icon {
+          align-self: center;
+          font-size: 19px;
+        }
+      }
+    }
+    &-create {
+      display: flex;
+    }
+    &-create-link {
+      display: flex;
+      align-items: center;
+      color: #fff;
+      margin-left: $gap;
+      height: calc(#{$app-bar-height} - 2 * #{$gap} + 8px);
+      &:hover {
+        background-color: $primary-btn-hover-color;
+      }
+    }
+  }
+  .header-right {
+    display: flex;
+    height: 100%;
+    gap: $gap;
+    flex-grow: 0;
+    .search {
+      display: flex;
+      max-width: 200px;
+      min-width: 200px;
+      margin-left: auto;
+      position: relative;
+      &-icon {
+        border-top-left-radius: $column-border-radius;
+        border-bottom-left-radius: $column-border-radius;
+        position: absolute;
+        top: 50%;
+        transform: translate(0, -50%);
+        display: flex;
+        align-items: center;
+        color: #fff;
+      }
+      &-input {
+        border: 1px solid #5498c0;
+        padding-left: 32px;
+        color: #fff;
+        border-radius: 4px;
+        background-color: $primary-btn-color;
+
+        //fixing responsive
+        display: inline-block;
+        display: flex;
+        height: calc(#{$app-bar-height} - 2 * #{$gap} + 8px) !important;
+        align-items: center;
+        justify-content: center;
+        &:hover {
+          background-color: #66a3c6;
+        }
+        &::placeholder {
+          color: #fff;
+          opacity: 1;
+        }
+        &::-webkit-input-placeholder {
+          color: #fff !important;
+          opacity: 1;
+        }
+        &.form-control.form-control-sm {
+          min-height: 100%;
+        }
+        &.form-control:focus {
+          outline: none;
+          border: 1px solid #5498c0;
+        }
+      }
+    }
+    .header-notify {
+      max-width: 50px;
+      &-link {
+        color: #fff;
+        border: none;
+        padding: 0 8px 0 2px;
+        border-radius: 50%;
+        background-color: transparent;
+        height: calc(#{$app-bar-height} - 2 * #{$gap} + 8px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        &:hover {
+          background-color: $primary-btn-hover-color;
+        }
+        &.dropdown-toggle::after {
+          display: none;
+        }
+      }
+    }
+    .header-info {
+      max-width: 50px;
+      &-btn {
+        color: #fff;
+        border: none;
+        padding: 0 8px 0 2px;
+        border-radius: 50%;
+        background-color: transparent;
+        height: calc(#{$app-bar-height} - 2 * #{$gap} + 8px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        &:hover {
+          background-color: $primary-btn-hover-color;
+        }
+        &.dropdown-toggle::after {
+          display: none;
+        }
+      }
+    }
+    .header-user {
+      max-width: 50px;
+      &-btn {
+        color: #fff;
+        padding-left: 6px;
+        padding-right: 6px;
+        border: none;
+        background-color: transparent;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: calc(#{$app-bar-height} - 2 * #{$gap} + 8px);
+        .user-bg-img {
+          background-image: url(../../img/user.jpg);
+          background-size: cover;
+          background-position: center;
+          display: block;
+          border-radius: 50%;
+          height: 24px;
+          width: 24px;
+          line-height: 24px;
+        }
+        &:hover {
+          background-color: $primary-btn-hover-color;
+        }
+        &.dropdown-toggle::after {
+          display: none;
+        }
+      }
+    }
+  }
 }

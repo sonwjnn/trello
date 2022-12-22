@@ -1,0 +1,21 @@
+.btn {
+  display: inline-block;
+  border: none;
+  font-weight: 500;
+  padding: 8px 12px;
+  border-radius: $column-border-radius;
+  font-size: 16px;
+  cursor: pointer;
+
+  // &--white {
+  //   padding: 13px 50px;
+  //   background-color: white;
+  //   color: $gray-light;
+  &:active {
+    color: #fff;
+  }
+  &--primary {
+    color: #fff;
+    background-color: $primary-btn-color;
+  }
+}
