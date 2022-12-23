@@ -6,7 +6,7 @@ function BoardBar() {
   return (
     <nav className="navbar board-bar">
       <Col className="workspace">
-        <Col className="workspace-item">
+        <div className="workspace-item">
           <Dropdown>
             <Dropdown.Toggle
               variant="success"
@@ -25,7 +25,17 @@ function BoardBar() {
               <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
-        </Col>
+        </div>
+        <div className="workspace-item member-avatar">
+          <div className="user-bg-img"></div>
+          <div className="user-bg-img"></div>
+          <div className="user-bg-img"></div>
+          <div className="user-bg-img"></div>
+          <div className="user-bg-img"></div>
+
+          <span className="more-members">+7</span>
+          <span className="invite-members btn">Invite</span>
+        </div>
       </Col>
       <Col className="board-header">
         <Row className="board-header-actions">
@@ -74,7 +84,7 @@ function BoardBar() {
               <Dropdown.Toggle
                 variant="success"
                 id="dropdown-basic"
-                className="board-header-actions-link"
+                className="board-header-actions-link filter-separator"
               >
                 <div className="filter-icon">
                   <i className="fa fa-filter icon"></i>
