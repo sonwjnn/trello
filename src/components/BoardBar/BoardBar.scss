@@ -19,6 +19,18 @@
       padding: 0;
       margin: 0;
       height: 100%;
+      position: relative;
+      &:not(:last-child) {
+        margin-right: $gap;
+        &::after {
+          content: '|';
+          color: #298fc9;
+          right: -12px;
+          top: 50%;
+          transform: translateY(-50%);
+          position: absolute;
+        }
+      }
       &-link {
         padding-right: 12px;
         color: #fff;
@@ -37,9 +49,44 @@
       .user-icon {
         height: 100%;
         width: 100%;
+        display: flex;
+        align-items: center;
         .icon {
           margin: 0 8px 0 0;
         }
+      }
+    }
+    .member-avatar {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      color: #fff;
+      height: 100%;
+      .user-bg-img {
+        background-image: url(../../img/userCat.jpg);
+        background-size: cover;
+        background-position: center;
+        display: block;
+        border-radius: 50%;
+        height: 24px;
+        width: 24px;
+        line-height: 24px;
+      }
+      .more-members {
+        height: 24px;
+        width: 24px;
+        border-radius: 50%;
+        line-height: 24px;
+        background-color: #3394cc;
+        font-size: 13px;
+        text-align: center;
+      }
+      .invite-members {
+        height: 100%;
+        &:active {
+          background-color: #3394cc;
+        }
+        margin-left: $gap;
       }
     }
   }
@@ -56,9 +103,24 @@
         padding: 0;
         margin: 0;
         height: 100%;
+        position: relative;
+        &:not(:last-child) {
+          margin-right: $gap;
+          &::after {
+            content: '|';
+            color: #298fc9;
+            right: -12px;
+            top: 50%;
+            transform: translateY(-50%);
+            position: absolute;
+          }
+        }
+
         .bolt-icon {
           height: 100%;
           width: 100%;
+          display: flex;
+          align-items: center;
           .icon {
             font-size: 16px;
             margin: 0 8px 0 0;
@@ -67,6 +129,8 @@
         .rocket-icon {
           height: 100%;
           width: 100%;
+          display: flex;
+          align-items: center;
           .icon {
             font-size: 16px;
             margin: 0 8px 0 0;
@@ -75,10 +139,20 @@
         .filter-icon {
           height: 100%;
           width: 100%;
+          display: flex;
+          align-items: center;
           .icon {
             font-size: 16px;
             margin: 0 8px 0 0;
           }
+        }
+      }
+      .filter-separator {
+        position: relative;
+        &:after {
+          content: '|';
+          color: #333;
+          position: absolute;
         }
       }
       &-link {
