@@ -5,8 +5,8 @@
   "dependencies": {
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
+    "@testing-library/react": "^14.0.0",
+    "@testing-library/user-event": "^14.4.3",
     "axios": "^1.2.1",
     "bootstrap": "^5.2.3",
     "font-awesome": "^4.7.0",
@@ -14,14 +14,14 @@
     "html-react-parser": "^3.0.4",
     "jsconfig": "^0.2.0",
     "lodash": "^4.17.21",
-    "node-sass": "^7.0.3",
     "nvm": "^0.0.4",
     "react": "^18.2.0",
     "react-bootstrap": "^2.6.0",
     "react-dom": "^18.2.0",
     "react-scripts": "^5.0.1",
     "react-smooth-dnd": "^0.11.1",
-    "web-vitals": "^2.1.4"
+    "sass": "^1.59.2",
+    "web-vitals": "^3.3.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -48,5 +48,6 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:3000"
+  "proxy": "http://localhost:3000",
+  "devDependencies": {}
 }
