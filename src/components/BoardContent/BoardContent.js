@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { isEmpty, cloneDeep } from 'lodash'
+import { flushSync } from 'react-dom'
 
 import './BoardContent.scss'
 import BoardColumn from 'components/BoardColumn/BoardColumn'
@@ -11,7 +12,7 @@ import {
   Row,
   Container as BootstrapContainer,
   Form,
-  Button
+  Button,
 } from 'react-bootstrap'
 
 import {
@@ -19,7 +20,7 @@ import {
   fetchBoardDetails,
   updateBoard,
   updateColumn,
-  updateCard
+  updateCard,
 } from 'actions/ApiCall'
 
 function BoardContent() {
@@ -32,11 +33,11 @@ function BoardContent() {
 
   const newColumnInputRef = useRef(null)
 
-  const onNewColumnTitleChange = e => setNewColumnTitle(e.target.value)
+  const onNewColumnTitleChange = (e) => setNewColumnTitle(e.target.value)
 
   useEffect(() => {
     const boardId = '63947713d29ca6b4b5647768'
-    fetchBoardDetails(boardId).then(board => {
+    fetchBoardDetails(boardId).then((board) => {
       setBoard(board)
       setColumns(mapOrder(board.columns, board.columnOrder, '_id'))
     })
@@ -53,14 +54,14 @@ function BoardContent() {
     return <div className="not-board">No Board Content!</div>
   }
 
-  const onColumnDrop = dropResult => {
+  const onColumnDrop = (dropResult) => {
     if (dropResult.removedIndex == dropResult.addedIndex) return
 
     let newColumns = cloneDeep(columns)
     let newBoard = cloneDeep(board)
 
     newColumns = applyDrag(newColumns, dropResult)
-    newBoard.columnOrder = newColumns.map(col => col._id)
+    newBoard.columnOrder = newColumns.map((col) => col._id)
     newBoard.columns = newColumns
 
     setColumns(newColumns)
@@ -77,13 +78,13 @@ function BoardContent() {
     if (dropResult.removedIndex == dropResult.addedIndex) return
 
     if (dropResult.removedIndex !== null || dropResult.addedIndex !== null) {
-      let newColumns = [...columns]
+      let newColumns = cloneDeep(columns)
       //cloneDeep newwColumns error cant change state columns
 
-      let currentColumn = newColumns.find(col => col._id === columnId)
+      let currentColumn = newColumns.find((col) => col._id === columnId)
       currentColumn.cards = applyDrag(currentColumn.cards, dropResult)
-      currentColumn.cardOrder = currentColumn.cards.map(card => card._id)
-      setColumns(newColumns)
+      currentColumn.cardOrder = currentColumn.cards.map((card) => card._id)
+      flushSync(() => setColumns(newColumns))
 
       if (dropResult.removedIndex !== null && dropResult.addedIndex !== null) {
         await updateColumn(currentColumn._id, currentColumn).catch(() =>
@@ -110,15 +111,15 @@ function BoardContent() {
     }
     const newColumn = {
       title: newColumnTitle.trim(),
-      boardId: board._id
+      boardId: board._id,
     }
 
-    createNewColumn(newColumn).then(column => {
+    createNewColumn(newColumn).then((column) => {
       let newColumns = [...columns]
       newColumns.push(column)
 
       let newBoard = { ...board }
-      newBoard.columnOrder = newColumns.map(col => col._id)
+      newBoard.columnOrder = newColumns.map((col) => col._id)
       newBoard.columns = newColumns
 
       setBoard(newBoard)
@@ -128,11 +129,11 @@ function BoardContent() {
     })
   }
 
-  const onColumnUpdateState = newColumnToUpdate => {
+  const onColumnUpdateState = (newColumnToUpdate) => {
     const columnIdToUpdate = newColumnToUpdate._id
     let newColumns = [...columns]
     const columnIndexToUpdate = newColumns.findIndex(
-      col => col._id === columnIdToUpdate
+      (col) => col._id === columnIdToUpdate
     )
 
     if (newColumnToUpdate._destroy) {
@@ -144,7 +145,7 @@ function BoardContent() {
     }
 
     let newBoard = { ...board }
-    newBoard.columnOrder = newColumns.map(col => col._id)
+    newBoard.columnOrder = newColumns.map((col) => col._id)
     newBoard.columns = newColumns
 
     setBoard(newBoard)
@@ -156,12 +157,12 @@ function BoardContent() {
       <Container
         orientation="horizontal"
         onDrop={onColumnDrop}
-        getChildPayload={index => columns[index]}
+        getChildPayload={(index) => columns[index]}
         dragHandleSelector=".column-drag-handle"
         dropPlaceholder={{
           animationDuration: 150,
           showOnTop: true,
-          className: 'board-column-drop-preview'
+          className: 'board-column-drop-preview',
         }}
       >
         {columns.map((column, index) => (

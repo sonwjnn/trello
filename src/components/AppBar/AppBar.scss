@@ -1,5 +1,5 @@
-@import 'sass/variables';
-@import 'sass/global.scss';
+@import '../../sass/variables';
+@import '../../sass/global.scss';
 
 .app-bar {
   height: $app-bar-height;
@@ -185,14 +185,13 @@
       }
     }
     .header-notify {
-      max-width: 50px;
+      max-width: 24px !important;
       &-link {
         color: #fff;
         border: none;
-        padding: 0 8px 0 2px;
+        padding: 0 6px;
         border-radius: 50%;
         background-color: transparent;
-        height: calc(#{$app-bar-height} - 2 * #{$gap} + 8px);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -201,42 +200,45 @@
         }
         &.dropdown-toggle::after {
           display: none;
+        }
+        .fa-bell {
+          margin: 2px 0 0 0;
         }
       }
     }
     .header-info {
-      max-width: 50px;
+      max-width: 24px !important;
       &-btn {
         color: #fff;
         border: none;
-        padding: 0 8px 0 2px;
+        padding: 0 6px;
         border-radius: 50%;
         background-color: transparent;
-        height: calc(#{$app-bar-height} - 2 * #{$gap} + 8px);
         display: flex;
-        align-items: center;
-        justify-content: center;
+
         &:hover {
           background-color: $primary-btn-hover-color;
         }
         &.dropdown-toggle::after {
           display: none;
         }
+        .fa-info-circle {
+          margin: 2px 0 0 0;
+        }
       }
     }
     .header-user {
-      max-width: 50px;
+      max-width: 24px !important;
+      margin-right: 12px;
       &-btn {
         color: #fff;
-        padding-left: 6px;
-        padding-right: 6px;
+        padding: 0;
         border: none;
         background-color: transparent;
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
-        height: calc(#{$app-bar-height} - 2 * #{$gap} + 8px);
         .user-bg-img {
           background-image: url(../../img/userCat.jpg);
           background-size: cover;
@@ -245,7 +247,7 @@
           border-radius: 50%;
           height: 24px;
           width: 24px;
-          line-height: 24px;
+          line-height: calc(#{$app-bar-height} - 2 * #{$gap} + 8px);
         }
         &:hover {
           background-color: $primary-btn-hover-color;
