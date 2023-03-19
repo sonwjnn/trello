@@ -7,21 +7,9 @@ import BoardColumn from 'components/BoardColumn/BoardColumn'
 import { Container, Draggable } from 'react-smooth-dnd'
 import { mapOrder } from 'utilities/sorts'
 import { applyDrag } from 'utilities/dragDrop'
-import {
-  Col,
-  Row,
-  Container as BootstrapContainer,
-  Form,
-  Button,
-} from 'react-bootstrap'
+import { Col, Row, Container as BootstrapContainer, Form, Button } from 'react-bootstrap'
 
-import {
-  createNewColumn,
-  fetchBoardDetails,
-  updateBoard,
-  updateColumn,
-  updateCard,
-} from 'actions/ApiCall'
+import { createNewColumn, fetchBoardDetails, updateBoard, updateColumn, updateCard } from 'actions/ApiCall'
 
 function BoardContent() {
   const [board, setBoard] = useState({})
@@ -51,7 +39,7 @@ function BoardContent() {
   }, [openNewColumn])
 
   if (isEmpty(board)) {
-    return <div className="not-board">No Board Content!</div>
+    return <div className='not-board'>No Board Content!</div>
   }
 
   const onColumnDrop = (dropResult) => {
@@ -87,9 +75,7 @@ function BoardContent() {
       flushSync(() => setColumns(newColumns))
 
       if (dropResult.removedIndex !== null && dropResult.addedIndex !== null) {
-        await updateColumn(currentColumn._id, currentColumn).catch(() =>
-          setColumns(columns)
-        )
+        await updateColumn(currentColumn._id, currentColumn).catch(() => setColumns(columns))
       } else {
         await updateColumn(currentColumn._id, currentColumn).catch(() => {
           setColumns(columns)
@@ -111,7 +97,7 @@ function BoardContent() {
     }
     const newColumn = {
       title: newColumnTitle.trim(),
-      boardId: board._id,
+      boardId: board._id
     }
 
     createNewColumn(newColumn).then((column) => {
@@ -132,9 +118,7 @@ function BoardContent() {
   const onColumnUpdateState = (newColumnToUpdate) => {
     const columnIdToUpdate = newColumnToUpdate._id
     let newColumns = [...columns]
-    const columnIndexToUpdate = newColumns.findIndex(
-      (col) => col._id === columnIdToUpdate
-    )
+    const columnIndexToUpdate = newColumns.findIndex((col) => col._id === columnIdToUpdate)
 
     if (newColumnToUpdate._destroy) {
       //remove column
@@ -153,62 +137,50 @@ function BoardContent() {
   }
 
   return (
-    <div className="board-content">
+    <div className='board-content'>
       <Container
-        orientation="horizontal"
+        orientation='horizontal'
         onDrop={onColumnDrop}
         getChildPayload={(index) => columns[index]}
-        dragHandleSelector=".column-drag-handle"
+        dragHandleSelector='.column-drag-handle'
         dropPlaceholder={{
           animationDuration: 150,
           showOnTop: true,
-          className: 'board-column-drop-preview',
+          className: 'board-column-drop-preview'
         }}
       >
         {columns.map((column, index) => (
           <Draggable key={index}>
-            <BoardColumn
-              column={column}
-              onCardDrop={onCardDrop}
-              onColumnUpdateState={onColumnUpdateState}
-            />
+            <BoardColumn column={column} onCardDrop={onCardDrop} onColumnUpdateState={onColumnUpdateState} />
           </Draggable>
         ))}
       </Container>
-      <BootstrapContainer className="bootstrap-container">
+      <BootstrapContainer className='bootstrap-container'>
         {!openNewColumn && (
           <Row>
-            <Col className="add-new-column" onClick={toggleNewColumnForm}>
-              <i className="fa fa-plus icon"></i>Add another column
+            <Col className='add-new-column' onClick={toggleNewColumnForm}>
+              <i className='fa fa-plus icon'></i>Add another column
             </Col>
           </Row>
         )}
         {openNewColumn && (
           <Row>
-            <Col className="enter-new-column">
+            <Col className='enter-new-column'>
               <Form.Control
-                size="sm"
-                type="email"
-                placeholder="Enter column title..."
-                className="input-enter-new-column"
+                size='sm'
+                type='email'
+                placeholder='Enter column title...'
+                className='input-enter-new-column'
                 ref={newColumnInputRef}
                 onChange={onNewColumnTitleChange}
                 // onBlur={toggleNewColumnForm}
                 value={newColumnTitle}
               />
-              <Button
-                className="add-new-col success"
-                variant="success"
-                size="sm"
-                onClick={addNewColumn}
-              >
+              <Button className='add-new-col success' variant='success' size='sm' onClick={addNewColumn}>
                 Add list
               </Button>
-              <span
-                onClick={toggleNewColumnForm}
-                className="trello-cancle-icon"
-              >
-                <i className="fa fa-trash icon" />
+              <span onClick={toggleNewColumnForm} className='trello-cancle-icon'>
+                <i className='fa fa-trash icon' />
               </span>
             </Col>
           </Row>

@@ -4,7 +4,7 @@ import AppBar from 'components/AppBar/AppBar'
 import Board from 'components/Board/Board'
 function App() {
   return (
-    <div className="Trello">
+    <div className='Trello'>
       <AppBar />
       <Board />
     </div>

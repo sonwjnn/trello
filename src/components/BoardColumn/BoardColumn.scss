@@ -84,9 +84,7 @@
   }
 
   .cards {
-    max-height: calc(
-      #{$board-column-height} - #{$column-header-height} - #{$column-footer-height}
-    );
+    max-height: calc(#{$board-column-height} - #{$column-header-height} - #{$column-footer-height});
     overflow-y: auto;
     &::-webkit-scrollbar {
       -webkit-appearance: none;

@@ -4,7 +4,7 @@ import BoardBar from 'components/BoardBar/BoardBar'
 import BoardContent from 'components/BoardContent/BoardContent'
 function Board() {
   return (
-    <div className="board">
+    <div className='board'>
       <BoardBar />
       <BoardContent />
     </div>
